@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DashboardService } from '../dashboard.service';
 import { isNullOrUndefined } from 'util';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -17,6 +17,10 @@ export class DashboardComponent implements OnInit {
   ) {}
   allchanges;
   newformerr = false;
+  submitted = false;
+
+  @ViewChild('closebutton') closebutton;
+
   ngOnInit() {
     this.getAllChangesData();
   }
@@ -26,6 +30,10 @@ export class DashboardComponent implements OnInit {
     Type: ['', Validators.required],
     Content: ['', Validators.required],
   });
+
+  get f() {
+    return this.newchngForm.controls;
+  }
   getTypeclass(type: string) {
     switch (type) {
       case 'New Release':
@@ -52,12 +60,10 @@ export class DashboardComponent implements OnInit {
     );
   }
   insertChange() {
+    this.submitted = true;
     var nwchange = this.newchngForm.value;
-    if (
-      (this.newchngForm.dirty && !this.newchngForm.valid) ||
-      this.newchngForm.value.Title == null
-    ) {
-      return (this.newformerr = true);
+    if (!this.newchngForm.valid) {
+      //return (this.newformerr = true);
     } else {
       this.newformerr = false;
       this.dashboardService.insertnewchange(nwchange).subscribe(
@@ -68,6 +74,7 @@ export class DashboardComponent implements OnInit {
           console.log('Error Occured :' + JSON.stringify(err, undefined, 2));
         }
       );
+      this.closebutton.nativeElement.click();
       this.nextstep();
     }
   }
@@ -75,7 +82,9 @@ export class DashboardComponent implements OnInit {
   nextstep() {
     this.newchngForm.reset();
     this.newformerr = false;
+    this._router.navigate(['dashboard']);
     this.ngOnInit();
+
   }
   deleteRow(change: any) {
     if (!isNullOrUndefined(change)) {

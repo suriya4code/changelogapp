@@ -1,9 +1,8 @@
 <div class="container">
   <br />
 
- <div id="user" class="clearfix">
- </div>
- 
+  <div id="user" class="clearfix"></div>
+
   <hr />
   <div class="clearfix">
     <!-- <div class="float-left">
@@ -19,7 +18,14 @@
         Add New Change
       </button>
     </div>
-<a name="" id="" class="btn btn-primary float-right text-white" (click)="logoff()" role="button">LogOff</a>
+    <a
+      name=""
+      id=""
+      class="btn btn-primary float-right text-white"
+      (click)="logoff()"
+      role="button"
+      >LogOff</a
+    >
 
     <!-- Modal -->
     <div
@@ -36,6 +42,7 @@
             <h5 class="modal-title">New Change</h5>
             <button
               type="button"
+              #closebutton
               class="close"
               data-dismiss="modal"
               aria-label="Close"
@@ -57,17 +64,38 @@
                     formControlName="Title"
                     placeholder=""
                     aria-describedby="helpId"
+                    [ngClass]="{ 'is-invalid': submitted && f.Title.errors }"
                   />
+                  <div
+                    *ngIf="submitted && f.Title.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.Title.errors.required">
+                      Tiltle is required
+                    </div>
+                  </div>
                 </div>
                 <div class="form-group">
                   <label for="">Type</label>
-                  <select class="form-control" 
+                  <select
+                    class="form-control"
                     formControlName="Type"
-                  name="" id="">
+                    name=""
+                    id=""
+                    [ngClass]="{ 'is-invalid': submitted && f.Type.errors }"
+                  >
                     <option>New Release</option>
                     <option>Update</option>
                     <option>Fix</option>
                   </select>
+                  <div
+                    *ngIf="submitted && f.Type.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.Type.errors.required">
+                      Type is required
+                    </div>
+                  </div>
                 </div>
 
                 <div class="form-group">
@@ -80,7 +108,16 @@
                     formControlName="Content"
                     placeholder=""
                     aria-describedby="helpId"
+                    [ngClass]="{ 'is-invalid': submitted && f.Content.errors }"
                   />
+                  <div
+                    *ngIf="submitted && f.Content.errors"
+                    class="invalid-feedback"
+                  >
+                    <div *ngIf="f.Content.errors.required">
+                      Content is required
+                    </div>
+                  </div>
                 </div>
               </form>
               <!-- *********************************** -->
@@ -94,18 +131,13 @@
             >
               Close
             </button>
-            <button type="button" class="btn btn-primary" (click)="insertChange()">Save</button>
-
-            <div class="alert alert-danger alert-dismissible fade show"
-             role="alert" 
-             [hidden]="!newformerr">
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                <span class="sr-only">Close</span>
-              </button>
-              <strong>All Fields are required!</strong> Please fill all above fields !!
-            </div>
-
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="insertChange()"
+            >
+              Save
+            </button>
           </div>
         </div>
       </div>
@@ -143,7 +175,11 @@
                 {{ change.Type }} <span class="badge badge-primary">{{ change.Type }}</span>
           </button>
           </td> -->
-            <td class="align-middle no-wrap"><span [ngClass]="getTypeclass(change.Type)">{{change.Type}}</span></td>
+            <td class="align-middle no-wrap">
+              <span [ngClass]="getTypeclass(change.Type)">{{
+                change.Type
+              }}</span>
+            </td>
             <td class="align-middle no-wrap">
               {{ change.UpdatedDate | date: "medium" }}
             </td>
@@ -156,7 +192,7 @@
                 class="btn btn-danger btn-sm"
                 (click)="deleteRow(change)"
               >
-              <span aria-hidden="true">&times;</span> 
+                <span aria-hidden="true">&times;</span>
               </button>
             </td>
           </tr>

@@ -15,13 +15,13 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private loginservice: LoginService,
-    private _router : Router
+    private _router: Router
   ) {}
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
-      password: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
 
@@ -34,15 +34,14 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
     console.log(this.loginForm.value);
     if (this.loginForm.valid) {
-      this.loginservice.login(this.loginForm.value)
-        .subscribe(
-          data => {
-            console.log(data);
-            localStorage.setItem('token', data.toString());
-            this._router.navigate(['/dashboard']);
-          },
-          error => { }
-        );
+      this.loginservice.login(this.loginForm.value).subscribe(
+        (data) => {
+          console.log(data);
+          localStorage.setItem('token', data.toString());
+          this._router.navigate(['/dashboard']);
+        },
+        (error) => {}
+      );
     }
   }
 }
