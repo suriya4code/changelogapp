@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class DashboardService {
-  baseurl = 'http://localhost:3000/api/v1/change';
+  baseurl = 'https://changelogbackendapi.herokuapp.com/api/v1/change';
 
   constructor(private httpclient: HttpClient) {}
 
