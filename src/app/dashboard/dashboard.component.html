@@ -1,11 +1,15 @@
 <div class="container">
   <br />
+
+ <div id="user" class="clearfix">
+ </div>
+ 
   <hr />
   <div class="clearfix">
     <!-- <div class="float-left">
       <h3>All Changes<span class="badge badge-primary">New</span></h3>
     </div> -->
-    <div class="float-right">
+    <div class="float-left">
       <button
         type="button"
         class="btn btn-outline-success"
@@ -15,6 +19,7 @@
         Add New Change
       </button>
     </div>
+<a name="" id="" class="btn btn-primary float-right text-white" (click)="logoff()" role="button">LogOff</a>
 
     <!-- Modal -->
     <div
@@ -148,10 +153,10 @@
             <td class="align-middle">
               <button
                 type="button"
-                class="btn btn-danger"
+                class="btn btn-danger btn-sm"
                 (click)="deleteRow(change)"
               >
-                Delete
+              <span aria-hidden="true">&times;</span> 
               </button>
             </td>
           </tr>
