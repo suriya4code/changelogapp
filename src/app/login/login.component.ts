@@ -2,6 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { LoginService } from '../login.service';
 import { Router } from '@angular/router';
+import { AuthService } from 'angularx-social-login';
+import { SocialUser } from 'angularx-social-login';
+
+import {
+  FacebookLoginProvider,
+  GoogleLoginProvider,
+} from 'angularx-social-login';
 
 @Component({
   selector: 'app-login',
@@ -16,9 +23,11 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private loginservice: LoginService,
-    private _router: Router
+    private _router: Router,
+    private authService: AuthService
   ) {}
-
+  private user: SocialUser;
+  private loggedIn: boolean;
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -26,6 +35,29 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  public socialSignIn(socialProvider: string) {
+    let socialPlatformProvider;
+    if (socialProvider === 'facebook') {
+      socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
+    } else if (socialProvider === 'google') {
+      socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+    }
+    this.authService
+      .signIn(socialPlatformProvider)
+      .then((socialusers) => {
+        console.log(socialProvider, socialusers);
+        console.log(socialusers);
+        localStorage.setItem('currentusername', socialusers.name);
+        localStorage.setItem('token', "social" + socialusers.authToken);
+
+        this._router.navigate(['/dashboard']);
+        this.Savesresponse(socialusers);
+      })
+      .catch((err) => {});
+  }
+  Savesresponse(socialusers: SocialUser) {
+    console.log(socialusers);
+  }
   // convenience getter for easy access to form fields
   get f() {
     return this.loginForm.controls;
@@ -40,6 +72,10 @@ export class LoginComponent implements OnInit {
         (data) => {
           console.log(data);
           localStorage.setItem('token', data.toString());
+          localStorage.setItem(
+            'currentusername',
+            this.loginForm.value.username
+          );
           this._router.navigate(['/dashboard']);
         },
         (error) => {

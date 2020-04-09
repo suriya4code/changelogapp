@@ -5,9 +5,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
   providedIn: 'root',
 })
 export class LoginService {
-  constructor(private _http: HttpClient) { }
-  
-  baseurl = 'http://localhost:3000/api/v1/users';
+  constructor(private _http: HttpClient) {}
+
+  baseurl = 'https://changelogbackendapi.herokuapp.com/api/v1/users';
 
   submitRegister(body: any) {
     return this._http.post(this.baseurl + '/register', body, {

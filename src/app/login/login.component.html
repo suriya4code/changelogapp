@@ -39,9 +39,29 @@
             <a routerLink="/register" class="btn btn-link">Register</a>
           </div>
           <div class="alert alert-danger" role="alert" [hidden]="!loginerr">
-            <strong>Invalid Username/Password combination !</strong> Please try again with valid credentials
+            <strong>Invalid Username/Password combination !</strong> Please try
+            again with valid credentials
           </div>
         </form>
+        <hr style="border-top: 1px solid #eee;" />
+        <div class="row">
+          <div class="col-6">
+            <button
+              (click)="socialSignIn('facebook')"
+              class="loginBtn loginBtn--facebook"
+            >
+              Login with Facebook
+            </button>
+          </div>
+          <div class="col-6 text-right">
+            <button
+              (click)="socialSignIn('google')"
+              class="loginBtn loginBtn--google"
+            >
+              Login with Google
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

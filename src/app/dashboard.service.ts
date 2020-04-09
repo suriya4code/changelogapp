@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class DashboardService {
-  baseurl = 'http://localhost:3000/api/v1/change';
+  baseurl = 'https://changelogbackendapi.herokuapp.com/api/v1/change';
 
   constructor(private httpclient: HttpClient) {}
 
@@ -25,7 +25,7 @@ export class DashboardService {
     });
     return this.httpclient.post(this.baseurl, change, {
       headers: xheader,
-      params: new HttpParams().append('token', localStorage.getItem('token'))
+      params: new HttpParams().append('token', localStorage.getItem('token')),
     });
   }
   delChange(change: any): Observable<any> {
@@ -34,7 +34,7 @@ export class DashboardService {
     });
     return this.httpclient.delete(this.baseurl + '/?id=' + change._id, {
       params: new HttpParams().append('token', localStorage.getItem('token')),
-      headers: xheader
+      headers: xheader,
     });
   }
 }

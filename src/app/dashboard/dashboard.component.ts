@@ -3,6 +3,7 @@ import { DashboardService } from '../dashboard.service';
 import { isNullOrUndefined } from 'util';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'angularx-social-login';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +14,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private dashboardService: DashboardService,
     private fb: FormBuilder,
-    private _router: Router
+    private _router: Router,
+    public authService:AuthService
   ) {}
   allchanges;
   newformerr = false;
@@ -101,6 +103,7 @@ export class DashboardComponent implements OnInit {
   }
   logoff() {
     localStorage.removeItem('token');
+    this.authService.signOut();
     this._router.navigate(['login']);
   }
 }
