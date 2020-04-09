@@ -38,6 +38,9 @@
             <button [disabled]="loading" class="btn btn-primary">Login</button>
             <a routerLink="/register" class="btn btn-link">Register</a>
           </div>
+          <div class="alert alert-danger" role="alert" [hidden]="!loginerr">
+            <strong>Invalid Username/Password combination !</strong> Please try again with valid credentials
+          </div>
         </form>
       </div>
     </div>

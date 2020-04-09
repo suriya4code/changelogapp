@@ -69,11 +69,13 @@ export class DashboardComponent implements OnInit {
       this.dashboardService.insertnewchange(nwchange).subscribe(
         (resp) => {
           console.log(resp);
+          this.submitted = false;
         },
         (err) => {
           console.log('Error Occured :' + JSON.stringify(err, undefined, 2));
         }
       );
+    
       this.closebutton.nativeElement.click();
       this.nextstep();
     }

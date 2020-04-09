@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   submitted;
   loading;
+  loginerr = false;
   constructor(
     private formBuilder: FormBuilder,
     private loginservice: LoginService,
@@ -21,7 +22,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
     });
   }
 
@@ -32,6 +33,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+    this.loginerr = false;
     console.log(this.loginForm.value);
     if (this.loginForm.valid) {
       this.loginservice.login(this.loginForm.value).subscribe(
@@ -40,7 +42,9 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('token', data.toString());
           this._router.navigate(['/dashboard']);
         },
-        (error) => {}
+        (error) => {
+          this.loginerr = true;
+        }
       );
     }
   }
