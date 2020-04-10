@@ -6,34 +6,41 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class DashboardService {
-  baseurl = 'https://changelogbackendapi.herokuapp.com/api/v1/change';
+  baseurl = 'http://localhost:3333/api/v1/change';
 
   constructor(private httpclient: HttpClient) {}
 
   getAllChanges(): Observable<any> {
     const xheader = new HttpHeaders({
       'Content-Type': 'application/json; chareset=utf-8',
+      Authorization: localStorage.getItem('token'),
+      UserMode: localStorage.getItem('um')
     });
+
     return this.httpclient.get(this.baseurl, {
       headers: xheader,
-      params: new HttpParams().append('token', localStorage.getItem('token')),
     });
   }
+
   insertnewchange(change: any): Observable<any> {
     const xheader = new HttpHeaders({
       'Content-Type': 'application/json; chareset=utf-8',
+      Authorization: localStorage.getItem('token'),
+      UserMode: localStorage.getItem('um'),
     });
+
     return this.httpclient.post(this.baseurl, change, {
-      headers: xheader,
-      params: new HttpParams().append('token', localStorage.getItem('token')),
+      headers: xheader
     });
   }
   delChange(change: any): Observable<any> {
     const xheader = new HttpHeaders({
       'Content-Type': 'application/json; chareset=utf-8',
+      Authorization: localStorage.getItem('token'),
+      UserMode: localStorage.getItem('um'),
     });
+
     return this.httpclient.delete(this.baseurl + '/?id=' + change._id, {
-      params: new HttpParams().append('token', localStorage.getItem('token')),
       headers: xheader,
     });
   }

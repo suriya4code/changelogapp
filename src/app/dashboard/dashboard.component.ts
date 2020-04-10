@@ -20,11 +20,12 @@ export class DashboardComponent implements OnInit {
   allchanges;
   newformerr = false;
   submitted = false;
-
+  currentuser;
   @ViewChild('closebutton') closebutton;
 
   ngOnInit() {
     this.getAllChangesData();
+    this.currentuser = localStorage.getItem('currentusername');
   }
 
   newchngForm = this.fb.group({
@@ -103,6 +104,8 @@ export class DashboardComponent implements OnInit {
   }
   logoff() {
     localStorage.removeItem('token');
+    localStorage.removeItem('um');
+    localStorage.removeItem('currentusername');
     this.authService.signOut();
     this._router.navigate(['login']);
   }

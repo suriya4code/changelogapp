@@ -5,7 +5,10 @@
         <h2>Login</h2>
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
-            <label for="username">Username</label>
+            <label for="username">
+              <i class="fa fa-user" aria-hidden="true"></i>
+              Username</label
+            >
             <input
               type="text"
               formControlName="username"
@@ -20,7 +23,10 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="password">Password</label>
+            <label for="password">
+              <i class="fa fa-key" aria-hidden="true"></i>
+              Password</label
+            >
             <input
               type="password"
               formControlName="password"
@@ -34,34 +40,56 @@
               <div *ngIf="f.password.errors.required">Password is required</div>
             </div>
           </div>
-          <div class="form-group">
-            <button [disabled]="loading" class="btn btn-primary">Login</button>
-            <a routerLink="/register" class="btn btn-link">Register</a>
+          <div class="form-inline">
+            <button [disabled]="loading" class="btn btn-primary">
+              <i class="fa fa-sign-in" aria-hidden="true"></i>
+              Login
+            </button>
+            <a routerLink="/register" class="btn btn-info m-3">
+              <i class="fa fa-user-plus" aria-hidden="true"></i>
+              Register</a
+            >
+            <h5 class="text text-bold font-weight-bolder">(OR)</h5>
           </div>
           <div class="alert alert-danger" role="alert" [hidden]="!loginerr">
             <strong>Invalid Username/Password combination !</strong> Please try
             again with valid credentials
           </div>
         </form>
-        <hr style="border-top: 1px solid #eee;" />
-        <div class="row">
-          <div class="col-6">
-            <button
-              (click)="socialSignIn('facebook')"
-              class="loginBtn loginBtn--facebook"
-            >
-              Login with Facebook
-            </button>
-          </div>
-          <div class="col-6 text-right">
-            <button
-              (click)="socialSignIn('google')"
-              class="loginBtn loginBtn--google"
-            >
-              Login with Google
-            </button>
-          </div>
+        <div class="vl bg-warning"></div>
+        <br>
+        <div class="form-inline">
+          <button
+            class="btn btn-social btn-google"
+            (click)="socialSignIn('google')"
+          >
+            <i class="fa fa-google-plus-official" aria-hidden="true"></i>
+           Use Google
+          </button>
+          <button
+            class="btn btn-social btn-facebook ml-1"
+            (click)="socialSignIn('facebook')"
+          >
+            <i class="fa fa-facebook-official" aria-hidden="true"></i>
+            Use Facebook
+          </button>
         </div>
+        <br>
+        <div class="m1">
+          
+        </div>
+        <!-- <table class="table">
+          <tbody>
+            <tr>
+              <td scope="row">
+                
+              </td>
+              <td>
+                
+              </td>
+            </tr>
+          </tbody>
+        </table> -->
       </div>
     </div>
   </div>

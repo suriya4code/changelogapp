@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { LoginService } from '../login.service';
 import { Router } from '@angular/router';
-import { AuthService } from 'angularx-social-login';
-import { SocialUser } from 'angularx-social-login';
+import { AuthService, SocialUser } from 'angularx-social-login';
 
 import {
   FacebookLoginProvider,
@@ -48,8 +47,8 @@ export class LoginComponent implements OnInit {
         console.log(socialProvider, socialusers);
         console.log(socialusers);
         localStorage.setItem('currentusername', socialusers.name);
-        localStorage.setItem('token', "social" + socialusers.authToken);
-
+        localStorage.setItem('token', socialusers.authToken);
+          localStorage.setItem('um', 'social');
         this._router.navigate(['/dashboard']);
         this.Savesresponse(socialusers);
       })
@@ -58,6 +57,7 @@ export class LoginComponent implements OnInit {
   Savesresponse(socialusers: SocialUser) {
     console.log(socialusers);
   }
+
   // convenience getter for easy access to form fields
   get f() {
     return this.loginForm.controls;
@@ -72,6 +72,7 @@ export class LoginComponent implements OnInit {
         (data) => {
           console.log(data);
           localStorage.setItem('token', data.toString());
+          localStorage.setItem('um', 'local');
           localStorage.setItem(
             'currentusername',
             this.loginForm.value.username

@@ -12,6 +12,7 @@ import {
   GoogleLoginProvider,
   FacebookLoginProvider,
 } from 'angularx-social-login';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 let config = new AuthServiceConfig([
   {
@@ -43,12 +44,13 @@ export function provideConfig() {
     HttpClientModule,
     ReactiveFormsModule,
     SocialLoginModule,
+    FontAwesomeModule
   ],
   providers: [
     {
       provide: AuthServiceConfig,
       useFactory: provideConfig,
-    }
+    },
   ],
   bootstrap: [AppComponent],
 })

@@ -1,31 +1,37 @@
 <div class="container">
   <br />
 
-  <div id="user" class="clearfix"></div>
-
-  <hr />
-  <div class="clearfix">
-    <!-- <div class="float-left">
-      <h3>All Changes<span class="badge badge-primary">New</span></h3>
-    </div> -->
-    <div class="float-left">
+  <div class="row">
+    <div class="col-2">
       <button
         type="button"
         class="btn btn-outline-success"
         data-toggle="modal"
         data-target="#addChangeModal"
       >
-        Add New Change
+        <i class="fa fa-plus-square" aria-hidden="true"></i>
+        AddNewChange
       </button>
     </div>
-    <a
-      name=""
-      id=""
-      class="btn btn-primary float-right text-white"
-      (click)="logoff()"
-      role="button"
-      >LogOff</a
-    >
+    <div id="user" class="col-8">
+      <marquee
+        ><h4 class="text-capitalize font-italic font-weight-bolder">
+          Welcome
+          {{ currentuser }} <i class="fa fa-user" aria-hidden="true"></i></h4
+      ></marquee>
+    </div>
+    <div class="col-2">
+      <a
+        name=""
+        id=""
+        class="btn btn-primary text-white"
+        (click)="logoff()"
+        role="button"
+      >
+        <i class="fa fa-sign-out" aria-hidden="true"></i>
+        LogOff</a
+      >
+    </div>
 
     <!-- Modal -->
     <div
@@ -39,7 +45,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">New Change</h5>
+            <h5 class="modal-title font-weight-bolder">New Change</h5>
             <button
               type="button"
               #closebutton
@@ -170,11 +176,6 @@
             <td scope="row" class="align-middle no-wrap">
               {{ change.Title }}
             </td>
-            <!-- <td class="align-middle"> 
-          <button class="btn btn-warning">
-                {{ change.Type }} <span class="badge badge-primary">{{ change.Type }}</span>
-          </button>
-          </td> -->
             <td class="align-middle no-wrap">
               <span [ngClass]="getTypeclass(change.Type)">{{
                 change.Type
@@ -187,17 +188,15 @@
               {{ change.Content }}
             </td>
             <td class="align-middle">
-              <button
-                type="button"
-                class="btn btn-danger btn-sm"
-                (click)="deleteRow(change)"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
+              <a class="btn" (click)="deleteRow(change)">
+                <i class="fa fa-trash fa-2x text-danger" aria-hidden="true"></i>
+              </a>
             </td>
           </tr>
         </tbody>
       </table>
+      <br />
     </div>
   </div>
+  <div><hr /></div>
 </div>
