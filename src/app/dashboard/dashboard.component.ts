@@ -56,9 +56,7 @@ export class DashboardComponent implements OnInit {
       },
       (err) => {
         console.log('Error Occured :' + JSON.stringify(err, undefined, 2));
-        if (err.status == 401) {
           this._router.navigate(['login']);
-        }
       }
     );
   }
